@@ -11,8 +11,13 @@ angular.module('stravaView').controller('mainCtrl', function(mainService, $scope
 	var recentBike = {};
 	var allBike = {};
 	var ytdRunTime, ytdRunDistance;
+	$scope.test = 'helloworld'
+	$scope.deauth = function() {
+		debugger;
+		mainService.deauthorizeUser(user).then(function(data){
 
-
+		})
+	}
 	mainService.getPublicData(user).then(function(data){
 		// debugger;
 		console.log(data)
@@ -32,6 +37,13 @@ angular.module('stravaView').controller('mainCtrl', function(mainService, $scope
 
 			// ytdRunTime = data.ytd_run_totals.elapsed_time;
 			// ytdRunDistance = data.ytd_run_totals.distance;
+			$scope.ytdRun = mainService.getytdRun();
+			$scope.lifeRun = mainService.getLifeRun();
+			$scope.recentRun = mainService.getRecentRun();
+
+			$scope.ytdRide = mainService.getytdRide();
+			$scope.lifeRide = mainService.getLifeRide();
+			$scope.recentRide = mainService.getRecentRide();
 		})
 	})
 

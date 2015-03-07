@@ -6,6 +6,7 @@
 </head>
 <body ng-controller='mainCtrl'>
 
+
 	<div class='container'>
 		<div>
 			<h1 class='text-center strava-color'>STRAVaVIEw</h1>
@@ -15,24 +16,37 @@
 			<div class='threeMain'>
 				<h4>Run</h4>
 					<ul>
-						<li>Yeah buddy</li>
+						<li>
+							Distance:  {{ytdRun.distance.miles}} miles <br>
+							Time:{{ytdRun.moving_time.h}} hours {{ytdRun.moving_time.m}} min {{ytdRun.moving_time.s}} sec
+						</li>
 					</ul>
 			</div>
 			<div class='threeMain'>
 				<h4>Bike</h4>
 					<ul>
-						<li>Hello there</li>
+						<li>Distance:  {{ytdRide.distance.miles}} miles <br>
+						Time:{{ytdRide.moving_time.h}} hours {{ytdRide.moving_time.m}} min {{ytdRide.moving_time.s}} sec
+					</li>
 					</ul>
 			</div>
 	</div>
+	<button ng-click="deauth()" class='btn btn-primary'>Logout</button>
+	<timer />
+	<timer interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" async></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
 	<script type="text/javascript" src='app.js'></script>
-	<script type="text/javascript" src='oauth.js'></script>
-	<script type="text/javascript" src='oauth.io.js'></script>
 	<script type="text/javascript" src='mainCtrl.js'></script>
 	<script type="text/javascript" src='mainService.js'></script>
+	<script type="text/javascript" src='oauth.js'></script>
+	<script type="text/javascript" src='oauth.io.js'></script>
+	<script type="text/javascript" src='bower_components/angular-timer/app/js/timer.js'></script>
+	<script type="text/javascript" src='bower_components/angular-timer/app/js/i18nService.js'></script>
+	<script type="text/javascript" src='bower_components/momentjs/min/moment.min.js'></script>
+	<script type="text/javascript" src='bower_components/momentjs/min/locales.min.js'></script>
+	<script type="text/javascript" src='bower_components/humanize-duration/humanize-duration.js'></script>
 </body>
 </html>
