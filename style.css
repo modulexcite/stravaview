@@ -1,0 +1,50 @@
+html, body {
+	margin: 0 auto;
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.strava-color {
+	color: #FC4C02;
+}
+
+h1	{
+	font-size: 65px;
+}
+
+.header {
+	background-color: #FC4C02;
+	height: 80px;
+}
+
+.flexMain {
+	outline: red 1px solid;
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.threeMain {
+	outline: green 1px solid;
+	width: 450px;
+}
+
+h4 {
+	font-size: 40px;
+	text-align: center
+}
+
+/*
+	-webkit-transform: scale(1.5);
+	-webkit-filter: grayscale(1);
+	-webkit-filter: blur(5px);
+
+
+	.jake {animation: ;}
+*/
+
+
+
+
