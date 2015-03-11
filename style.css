@@ -3,6 +3,11 @@ html, body {
 	height: 100%;
 	width: 100%;
 	box-sizing: border-box;
+	background: #F5F5F5;
+}
+
+* {
+	/*outline: red 1px solid;*/
 }
 
 .strava-color {
@@ -14,26 +19,137 @@ h1	{
 }
 
 .header {
-	background-color: #FC4C02;
-	height: 80px;
+	float: left;
+	margin-left: 100px;
+}
+
+.lastActivity {
+	float: left;
+	margin-left: 200px;
+	margin-top: 50px;
+}
+
+.timeLeft {
+	font-size: 50px;
+}
+
+.links {
+	display: flex;
+	flex-direction: column;
+	padding-top: 50px;
+	margin-right: 40px;
+}
+
+.link {
+	margin: 26px;
+	text-decoration: none;
+	color: #1624C9;
+	-webkit-transform: scale(2, 2);
+	transition: all 800 ease;
+}
+
+.link:hover {
+	color: #FC4C02;
 }
 
 .flexMain {
-	outline: red 1px solid;
 	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-around;
 }
 
-.threeMain {
-	outline: green 1px solid;
-	width: 450px;
+h2 {
+	font-size: 150px;
+	-webkit-transform: rotate(-90deg);
+	text-align: center;
 }
-
 h4 {
 	font-size: 40px;
 	text-align: center
+}
+ul {
+	float: left;
+}
+.content {
+	margin: 30px 10px;
+	/*float: left;*/
+	font-family: Raleway;
+	height: 100%;
+	width: 100%;
+}
+
+.realTime {
+	display: flex;
+	flex-direction: column;
+	padding-top: 30px;
+}
+
+.segTime {
+	font-size: 120px;
+	margin: 0 auto;
+	height: 110px;
+}
+.fullDate {
+	margin-top: 190px;
+	margin-right: 30px; 
+	font-size: 75px;
+	font-weight: bold;
+	-webkit-transform: scale(1,2);
+	-webkit-transform: rotate(-90deg);
+}
+
+.catTitle {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 300px;
+	height: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 1s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
 }
 
 /*

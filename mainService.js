@@ -83,6 +83,9 @@ angular.module('stravaView').service('mainService', function($http, $q){
 	this.setPerformData = function(data) {
 		performData = data;
 	}
+	this.getPerformData = function() {
+		return performData;
+	}
 	var ytdRun = {};
 	var lifeRun = {}
 	var recentRun = {}

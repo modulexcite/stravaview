@@ -3,37 +3,81 @@
 	<title>STRAVAVIEW</title>
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="icons/css/fontello.css">
+	<link rel="stylesheet" type="text/css" href="icons/css/fontello-codes.css">
+	<link rel="stylesheet" type="text/css" href="icons/css/fontello-embedded.css">
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 </head>
 <body ng-controller='mainCtrl'>
 
 
-	<div class='container'>
-		<div>
-			<h1 class='text-center strava-color'>STRAVaVIEw</h1>
-			<h3 class='text-center'>{{basicData.firstname}} {{basicData.lastname}}</h3>
-		</div>
-		<div class='flexMain'>
-			<div class='threeMain'>
-				<h4>Run</h4>
-					<ul>
-						<li>
-							Distance:  {{ytdRun.distance.miles}} miles <br>
-							Time:{{ytdRun.moving_time.h}} hours {{ytdRun.moving_time.m}} min {{ytdRun.moving_time.s}} sec
-						</li>
-					</ul>
-			</div>
-			<div class='threeMain'>
-				<h4>Bike</h4>
-					<ul>
-						<li>Distance:  {{ytdRide.distance.miles}} miles <br>
-						Time:{{ytdRide.moving_time.h}} hours {{ytdRide.moving_time.m}} min {{ytdRide.moving_time.s}} sec
-					</li>
-					</ul>
-			</div>
+	<div class='header'>
+		<h1 class='strava-color'>STRAVaVIEw</h1>
+		<h3>{{basicData.firstname}} {{basicData.lastname}}</h3>
 	</div>
-	<button ng-click="deauth()" class='btn btn-primary'>Logout</button>
-	<timer />
-	<timer interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
+	<div class='lastActivity'>LAST ACTIVE: {{lastActTime}}</div>
+	<div class='container text-center'>
+		
+		<div class='flexMain text-center'>
+			<div class='links'>
+				<a class='link' href="https://www.facebook.com"><i class="icon-facebook"></i></a>
+				<a class='link' href="https://www.twitter.com"><i class="icon-twitter"></i></a>
+				<a class='link' href="https://www.github.com"><i class="icon-github"></i></a>
+				<a class='link' href="https://www.linkedin.com/"><i class="icon-linkedin"></i></a>
+				<a class='link' href="https://plus.google.com/"><i class="icon-googleplus"></i></a>
+			</div>
+			<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+				<div class="flipper">
+					<div class="front">
+						<div class='content'><br><br><br><br><br>
+							<h2>RUN</h2>
+						</div>
+					</div>
+					<div class="back">
+						<div class='content'>
+							<div class='catTitle'>RUN</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+				<div class="flipper">
+					<div class="front">
+						<div class='content'><br><br><br><br><br>
+							<h2>RIDE</h2>
+
+						</div>
+					</div>
+					<div class="back">
+						<div class='content'>
+							<div class='catTitle'>RIDE</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+				<div class="flipper">
+					<div class="front">
+						<div class='realTime'>
+							<div class='segTime'>00</div>
+							<div class='segTime'>00</div>
+							<div class='segTime'>00</div>
+						</div>
+					</div>
+					<div class="back">
+						<div class='content'>
+							<div class='fullDate'>
+								{{todaysDate}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<button ng-click="deauth()" class='btn btn-primary'>Logout</button> -->
+
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" async></script>
@@ -45,7 +89,8 @@
 	<script type="text/javascript" src='oauth.io.js'></script>
 	<script type="text/javascript" src='bower_components/angular-timer/app/js/timer.js'></script>
 	<script type="text/javascript" src='bower_components/angular-timer/app/js/i18nService.js'></script>
-	<script type="text/javascript" src='bower_components/momentjs/min/moment.min.js'></script>
+	<!-- <script type="text/javascript" src='bower_components/momentjs/min/moment.min.js'></script> -->
+	<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
 	<script type="text/javascript" src='bower_components/momentjs/min/locales.min.js'></script>
 	<script type="text/javascript" src='bower_components/humanize-duration/humanize-duration.js'></script>
 </body>

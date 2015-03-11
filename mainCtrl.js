@@ -11,32 +11,31 @@ angular.module('stravaView').controller('mainCtrl', function(mainService, $scope
 	var recentBike = {};
 	var allBike = {};
 	var ytdRunTime, ytdRunDistance;
-	$scope.test = 'helloworld'
+	moment.locale('en')
+	$scope.todaysDate = moment().format('MM/DD/YY')
+	$scope.test = moment().format('dddd')
 	$scope.deauth = function() {
 		debugger;
 		mainService.deauthorizeUser(user).then(function(data){
 
 		})
 	}
+	var lastActivity;
 	mainService.getPublicData(user).then(function(data){
 		// debugger;
 		console.log(data)
 		$scope.basicData = data
+		
+
+		lastActivity = data.updated_at;
+		var m = moment(lastActivity)
+		$scope.lastActTime = m.from(moment())
+
+		console.log('lastActivity', lastActivity)
 		mainService.getprivateData(data, user).then(function(data){
 			console.log(data)
 			mainService.setPerformData(data);
-			// $scope.ytdRunCount = data.ytd_run_totals.count;
-			// $scope.ytdRunDistance = data.ytd_run_totals.distance;
-			// $scope.ytdRunTime = data.ytd_run_totals.elapsed_time;
-			// if(data.ytd_ride_totals.count)
-			// 	$scope.ytdRideCount = data.ytd_ride_totals.count;
-			// if(data.ytd_ride_totals.distance)
-			// 	$scope.ytdRideDistance = data.ytd_ride_totals.distance;
-			// if(data.ytd_ride_totals.elapsed_time)
-			// 	$scope.ytdRideTime = data.ytd_ride_totals.elapsed_time;
 
-			// ytdRunTime = data.ytd_run_totals.elapsed_time;
-			// ytdRunDistance = data.ytd_run_totals.distance;
 			$scope.ytdRun = mainService.getytdRun();
 			$scope.lifeRun = mainService.getLifeRun();
 			$scope.recentRun = mainService.getRecentRun();
