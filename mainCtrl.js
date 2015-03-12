@@ -1,4 +1,4 @@
-angular.module('stravaView').controller('mainCtrl', function(mainService, $scope){
+angular.module('stravaView').controller('mainCtrl', function(mainService, $scope, $interval){
 	// debugger;
 	// var user = mainService.getAuthUser();
 
@@ -12,6 +12,7 @@ angular.module('stravaView').controller('mainCtrl', function(mainService, $scope
 	var allBike = {};
 	var ytdRunTime, ytdRunDistance;
 	moment.locale('en')
+
 	$scope.todaysDate = moment().format('MM/DD/YY')
 	$scope.test = moment().format('dddd')
 	$scope.deauth = function() {
@@ -45,5 +46,15 @@ angular.module('stravaView').controller('mainCtrl', function(mainService, $scope
 			$scope.recentRide = mainService.getRecentRide();
 		})
 	})
+
+	$interval(function(){
+		var t = moment()
+		t = t.add(1, 'seconds')
+		$scope.myHours = t.format('hh');
+		console.log(t.format('hh'))
+		$scope.myMins = t.format('mm');
+		$scope.mySecs = t.format('ss');
+
+	}, 1000)
 
 })

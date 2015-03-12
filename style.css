@@ -77,18 +77,23 @@ ul {
 	font-family: Raleway;
 	height: 100%;
 	width: 100%;
+	color: #303030;
+
 }
 
 .realTime {
 	display: flex;
 	flex-direction: column;
-	padding-top: 30px;
+	padding-top: 30px;		
+
+
 }
 
 .segTime {
 	font-size: 120px;
 	margin: 0 auto;
 	height: 110px;
+
 }
 .fullDate {
 	margin-top: 190px;
