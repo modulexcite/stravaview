@@ -4,6 +4,12 @@ html, body {
 	width: 100%;
 	box-sizing: border-box;
 	background: #F5F5F5;
+	overflow: hidden;
+}
+
+@font-face {
+	font-family: 'Raleway';
+	src: url('Raleway-Regular.ttf') format('truetype');
 }
 
 * {
@@ -12,6 +18,12 @@ html, body {
 
 .strava-color {
 	color: #FC4C02;
+}
+
+.myGraph {
+	width: 48%;
+	height: 40%;
+	float: left;
 }
 
 h1	{
@@ -45,7 +57,7 @@ h1	{
 	text-decoration: none;
 	color: #1624C9;
 	-webkit-transform: scale(2, 2);
-	transition: all 800 ease;
+	transition: all .4s ease-in-out;
 }
 
 .link:hover {
@@ -60,10 +72,15 @@ h1	{
 }
 
 h2 {
+	
+}
+
+.sideways {
 	font-size: 150px;
 	-webkit-transform: rotate(-90deg);
 	text-align: center;
 }
+
 h4 {
 	font-size: 40px;
 	text-align: center
@@ -78,13 +95,12 @@ ul {
 	height: 100%;
 	width: 100%;
 	color: #303030;
-
 }
 
 .realTime {
 	display: flex;
 	flex-direction: column;
-	padding-top: 30px;		
+	padding-top: 25px;		
 
 
 }
@@ -96,12 +112,13 @@ ul {
 
 }
 .fullDate {
-	margin-top: 190px;
-	margin-right: 30px; 
-	font-size: 75px;
+	/*margin-top: 190px;*/
+	margin-right: -10px; 
+	font-size: 90px;
 	font-weight: bold;
-	-webkit-transform: scale(1,2);
-	-webkit-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg) translateX(-160px);
+	/*-webkit-transform: rotate(-90deg);*/
+
 }
 
 .catTitle {
@@ -110,23 +127,39 @@ ul {
 }
 
 
-
-
-
-
 /* entire container, keeps perspective */
 .flip-container {
+	perspective: 1000;
+	position: relative;
+	transition: all .2s ease-in-out;
+}
+
+.flip-container-time {
 	perspective: 1000;
 }
 	/* flip the pane when hovered */
 	.flip-container:hover .flipper, .flip-container.hover .flipper {
-		transform: rotateY(180deg);
+		-webkit-transform: rotateY(180deg) translateY(-150px) translateX(-50px);
+
+		/*top: -130px;*/
+	}
+	.flip-container-time:hover .flipperTime, .flip-container-time.hover .flipperTime {
+		-webkit-transform: rotateY(180deg);
+
+		/*top: -130px;*/
 	}
 
-.flip-container, .front, .back {
+.flip-container, .front, .frontTime, .backTime {
 	width: 300px;
 	height: 480px;
 }
+
+.back {
+	width: 550px;
+	height: 600px;
+	background-color: rgba(38,51,38,.95);
+}
+
 
 /* flip speed goes here */
 .flipper {
@@ -136,13 +169,23 @@ ul {
 	position: relative;
 }
 
+.flipperTime {
+	transition: 1s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
 /* hide back of pane during swap */
-.front, .back {
+.front, .back, .backTime {
 	backface-visibility: hidden;
 
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.frontTime {
+	backface-visibility: hidden;
 }
 
 /* front pane, placed above back */
@@ -154,6 +197,10 @@ ul {
 
 /* back, initially hidden pane */
 .back {
+	transform: rotateY(180deg);
+}
+
+.backTime {
 	transform: rotateY(180deg);
 }
 

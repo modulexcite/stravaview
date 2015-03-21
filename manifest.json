@@ -1,0 +1,24 @@
+{
+	"manifest_version": 2,
+	"name": "stravaView",
+	"description": "This is going to be a new tab page that shows data to strava users",
+
+	"version": "0.0.1",
+
+	"permissions": [
+		"management", 
+		"identity", 
+		"https://www.strava.com/api/*", 
+		"webRequest"
+	],
+
+	"chrome_url_overrides": {
+		"newtab": "index.html"
+	},
+
+	"externally_connectable": {
+    	"matches": ["https://oauth.io/*"],
+    	"ids": ["mbidghcafehidomfadgdnlfopgfhplno"]
+	}
+
+}

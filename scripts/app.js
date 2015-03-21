@@ -9,13 +9,13 @@ app.config(function (OAuthProvider) {
 	
 		
 });
-app.run(function(mainService){
-	OAuth.initialize('VNU9Zd5Oc56rNM97oyHxN835Tus')
-		OAuth.popup('strava', {cache:true}).done(function(result) {
-		    //console.log(mainService.setUser(result))
-		    console.log(result)
-		    mainService.setUser(result)
+// app.run(function(mainService){
+// 	OAuth.initialize('VNU9Zd5Oc56rNM97oyHxN835Tus')
+// 		OAuth.popup('strava', {cache:true}).done(function(result) {
+// 		    //console.log(mainService.setUser(result))
+// 		    console.log(result)
+// 		    mainService.setUser(result)
 		    
-		})
-})
+// 		})
+// })
 

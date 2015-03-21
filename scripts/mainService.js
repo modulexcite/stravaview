@@ -4,6 +4,25 @@ angular.module('stravaView').service('mainService', function($http, $q){
 	var performData;
 	
 
+	this.authMe = function() {
+		// OAuth.initialize('VNU9Zd5Oc56rNM97oyHxN835Tus')
+		// OAuth.popup('strava', {cache:true}).done(function(result) {
+		//     debugger;
+		//     console.log(result)
+		//     authUser = result
+		    
+		// })
+
+		// chrome.identity.launchWebAuthFlow(
+	 //  		{'url': 'https://www.strava.com/api/v3/oauth?client_id=4995&redirect_uri=https://mbidghcafehidomfadgdnlfopgfhplno.chromiumapp.org', 'interactive': true},
+	 //  		function(redirect_url) { /* Extract token from redirect_url */ 
+	 //  			console.log(redirect_url)
+	 //  			debugger;
+	 //  			authUser = redirect_url;
+	 //  		}
+	 //  	);
+		
+	}
 
 	this.setUser = function(user) {
 		authUser = user;
@@ -13,28 +32,52 @@ angular.module('stravaView').service('mainService', function($http, $q){
 	}
 
 
-	this.getPublicData = function(user) {
-		var deferred = $q.defer()
-		$http({
-			method: 'JSONP',
-			url: 'https://www.strava.com/api/v3/athlete?callback=JSON_CALLBACK&access_token=' + user.access_token
-		})
-		.then(function(data) {
-			deferred.resolve(data.data)
-		})
-		return deferred.promise;
+	this.getPublicData = function() {
+		var deferred = $q.defer();
+		var xhr = new XMLHttpRequest();
+
+		xhr.open("GET", "https://www.strava.com/api/v3/athlete?access_token=37e544dfbfe9224d16572a5c66df1a0ea9b494b5", false);
+		
+		xhr.onreadystatechange = function(e) {
+			if(xhr.readyState !== 4) {
+				return;
+			}
+			if([200, 304].indexOf(xhr.status) === -1) {
+				deferred.reject(new Error('server responded with a status of ' + xhr.status))
+			}
+			else {
+				var data = e.target.response;
+				data = JSON.parse(data);
+				deferred.resolve(data)
+			}
+		}
+
+		xhr.send();
+		return deferred.promise
 	}
 
-	this.getprivateData = function(data, user) {
-		var deferred = $q.defer()
-		$http({
-			method: 'JSONP',
-			url: 'https://www.strava.com/api/v3/athletes/'+ data.id +'/stats' + '?callback=JSON_CALLBACK&access_token=' + user.access_token
-		})
-		.then(function(data){
-			deferred.resolve(data.data)
-		})
-		return deferred.promise;
+	this.getprivateData = function(data, token) {
+		var deferred = $q.defer();
+		var xhr = new XMLHttpRequest();
+
+		xhr.open("GET", 'https://www.strava.com/api/v3/athletes/'+ data.id +'/stats' + '?access_token=' + token, false);
+
+		xhr.onreadystatechange = function(e) {
+			if(xhr.readyState !== 4) {
+				return;
+			}
+			if([200, 304].indexOf(xhr.status) === -1) {
+				deferred.reject(new Error('server responded with a status of ' + xhr.status))
+			}
+			else {
+				var data = e.target.response;
+				data = JSON.parse(data);
+				deferred.resolve(data)
+			}
+		}
+
+		xhr.send();
+		return deferred.promise
 	}
 
 	this.deauthorizeUser = function(user) {
@@ -49,6 +92,24 @@ angular.module('stravaView').service('mainService', function($http, $q){
 		return deferred.promise;
 	}
 
+	this.convertSecondsAvg = function(secs) {
+		secs = Math.round(secs);
+    	var hours = Math.floor(secs / (60 * 60));
+
+    	var divisor_for_minutes = secs % (60 * 60);
+    	var minutes = Math.floor(divisor_for_minutes / 60);
+
+    	var divisor_for_seconds = divisor_for_minutes % 60;
+    	var seconds = Math.ceil(divisor_for_seconds);
+    	var time = minutes + '.' + seconds;
+    	var obj = {
+        	"h": hours,
+        	"m": minutes,
+        	"s": seconds
+    	};
+    	return time;
+	}
+
 	this.convertSeconds = function(secs) {
 		secs = Math.round(secs);
     	var hours = Math.floor(secs / (60 * 60));
@@ -58,13 +119,13 @@ angular.module('stravaView').service('mainService', function($http, $q){
 
     	var divisor_for_seconds = divisor_for_minutes % 60;
     	var seconds = Math.ceil(divisor_for_seconds);
-
+    	var time = hours + '.' + minutes
     	var obj = {
         	"h": hours,
         	"m": minutes,
         	"s": seconds
     	};
-    	return obj;
+    	return time;
 	}
 
 	this.convertMeters = function(meter) {
@@ -76,7 +137,7 @@ angular.module('stravaView').service('mainService', function($http, $q){
 
 	this.avgSpeed = function(time, distance) {
 		var avg = (distance/time)
-		var avgObj = this.convertSeconds(avg)
+		var avgObj = this.convertSecondsAvg(avg)
 		return avgObj;
 	}
 
@@ -150,14 +211,22 @@ angular.module('stravaView').service('mainService', function($http, $q){
 	}
 
 	this.getRecentRide = function() {
+		debugger;
 		if(performData.recent_ride_totals.count) {
 			recentRide.count = performData.recent_ride_totals.count;
 			recentRide.distance = this.convertMeters(performData.recent_ride_totals.distance)
 			recentRide.moving_time = this.convertSeconds(performData.recent_ride_totals.moving_time)
 			recentRide.avgSpeed = this.avgSpeed(recentRide.distance.miles, performData.recent_ride_totals.moving_time)
 		}
+
+		else {
+			recentRide.count = 0;
+			recentRide.distance = 0;
+			recentRide.moving_time = 0;
+			recentRide.avgSpeed = 0;
+		}
 		console.log('recentRide: ', recentRide)
-		return performData;
+		return recentRide;
 	}
 
 
