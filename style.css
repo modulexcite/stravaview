@@ -1,3 +1,7 @@
+@font-face {
+	font-family: 'Raleway';
+	src: url('Raleway-Regular.ttf') format('truetype');
+}
 html, body {
 	margin: 0 auto;
 	height: 100%;
@@ -5,19 +9,69 @@ html, body {
 	box-sizing: border-box;
 	background: #F5F5F5;
 	overflow: hidden;
+	font: Raleway;
 }
 
-@font-face {
-	font-family: 'Raleway';
-	src: url('Raleway-Regular.ttf') format('truetype');
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
 }
+
 
 * {
 	/*outline: red 1px solid;*/
 }
 
+.colorKey {
+	height: 40px;
+	width: 40px;
+	float: left;
+	outline: #00AF96 1px solid;
+	padding: 0 auto;
+	margin: 0 auto;
+	margin-left: 65px;
+	margin-right: 20px;
+	margin-top: 15px;
+	-webkit-transform: translateY(-10px);
+}
+
+.keyName {
+	text-align: left;
+	margin-top: 12px;
+}
+
+.lifeColor {
+	background-color: rgba(254,153,11,0.7);
+}
+
+.ytdColor {
+	background-color: rgba(252,76,2,0.7);
+}
+
+.recentColor {
+	background-color: rgba(254,12,11,0.7);
+}
+
 .strava-color {
 	color: #FC4C02;
+	float: left;
+	width: 40%;
+	height: 10px;
+}
+
+.name {
+	height: 10px;
+	float: left;
+	width: 30%;
+}
+
+.lastActivity {
+	float: left;
+	width: 50%;
+	height: 40px;
+	text-align: right;
+	padding-right: 100px;
+	padding-top: 25px;
 }
 
 .myGraph {
@@ -31,15 +85,12 @@ h1	{
 }
 
 .header {
+	width: 100%;
+	height: 150px;
 	float: left;
 	margin-left: 100px;
 }
 
-.lastActivity {
-	float: left;
-	margin-left: 200px;
-	margin-top: 50px;
-}
 
 .timeLeft {
 	font-size: 50px;
@@ -48,8 +99,9 @@ h1	{
 .links {
 	display: flex;
 	flex-direction: column;
-	padding-top: 50px;
+	padding-top: 60px;
 	margin-right: 40px;
+	-webkit-transform: translateX(-65px);
 }
 
 .link {
@@ -64,21 +116,29 @@ h1	{
 	color: #FC4C02;
 }
 
+.link:visited {
+	color: #1624C9;
+}
+
 .flexMain {
 	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
+
 	justify-content: space-around;
 }
 
 h2 {
 	
 }
-
+.newCenter {
+	height: 300px;
+}
 .sideways {
 	font-size: 150px;
-	-webkit-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg) translateY(-120px) translateX(-90px);
 	text-align: center;
+	margin-left: 100px;
 }
 
 h4 {
@@ -92,8 +152,8 @@ ul {
 	margin: 30px 10px;
 	/*float: left;*/
 	font-family: Raleway;
+	font-weight: 100;
 	height: 100%;
-	width: 100%;
 	color: #303030;
 }
 
@@ -101,7 +161,7 @@ ul {
 	display: flex;
 	flex-direction: column;
 	padding-top: 25px;		
-
+	outline: red 1px orange;
 
 }
 
@@ -112,22 +172,19 @@ ul {
 
 }
 .fullDate {
-	/*margin-top: 190px;*/
 	margin-right: -10px; 
 	font-size: 90px;
 	font-weight: bold;
-	-webkit-transform: rotate(-90deg) translateX(-160px);
-	/*-webkit-transform: rotate(-90deg);*/
-
+	-webkit-transform: translateX(80px);
 }
 
 .catTitle {
-	font-size: 40px;
+	color: white;
+	font-size: 20px;
 	font-weight: bold;
 }
 
 
-/* entire container, keeps perspective */
 .flip-container {
 	perspective: 1000;
 	position: relative;
@@ -140,16 +197,25 @@ ul {
 	/* flip the pane when hovered */
 	.flip-container:hover .flipper, .flip-container.hover .flipper {
 		-webkit-transform: rotateY(180deg) translateY(-150px) translateX(-50px);
-
-		/*top: -130px;*/
 	}
 	.flip-container-time:hover .flipperTime, .flip-container-time.hover .flipperTime {
 		-webkit-transform: rotateY(180deg);
-
-		/*top: -130px;*/
 	}
 
-.flip-container, .front, .frontTime, .backTime {
+.flip-container {
+	flex-shrink: 1;
+	width: 25%;
+	height: 480px;
+}
+
+.front, .frontTime {
+	margin: 0 auto;
+	width: 100%;
+	height: 480px;
+
+}
+
+.backTime {
 	width: 300px;
 	height: 480px;
 }
@@ -158,6 +224,7 @@ ul {
 	width: 550px;
 	height: 600px;
 	background-color: rgba(38,51,38,.95);
+	-webkit-transform: translateX(-100px);
 }
 
 

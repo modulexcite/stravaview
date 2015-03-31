@@ -14,10 +14,10 @@
 
 	<div class='header'>
 		<h1 class='strava-color'>STRAVaVIEw</h1>
-		<h3>{{basicData.firstname}} {{basicData.lastname}}</h3>
+		<h2 class='lastActivity' ng-cloak>Last Active: {{lastActTime}}</h2>
+		<h3 ng-cloak class='name'>{{basicData.firstname}} {{basicData.lastname}}</h3>
 		<!-- <button ng-click='authMe()'>Authenticate</button> -->
 	</div>
-	<h2 class='lastActivity'>LAST ACTIVE: {{lastActTime}}</h2>
 	<div class='container text-center'>
 		
 		<div class='flexMain text-center'>
@@ -36,7 +36,18 @@
 					<div class="back content">
 						<div class='content'>
 							<div class='catTitle'>
-								<div class='myGraph'></div>
+								<div class='myGraph' style='-webkit-transform: translateY(15px)'>
+
+									<div class='colorKey lifeColor'></div>
+									<div class='keyName'>Life</div><br>
+
+									<div class='colorKey ytdColor'></div>
+									<div class='keyName'>YTD</div><br>
+
+									<div class='colorKey recentColor'></div>
+									<div class='keyName'>Recent</div>
+
+								</div>
 								<div class='myGraph'>
 									<canvas id='avgSpeedGraphRun' width='200' height='250'></canvas>
 								</div>
@@ -53,21 +64,34 @@
 			</div>
 			<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
 				<div class="flipper">
-					<div class="front content"><br><br><br><br><br>
+					<div class="front content newCenter"><br><br><br><br><br>
 						<h2 class='sideways'>RIDE</h2>
 					</div>
 					<div class="back content">
+						<div class='content'>
 						<div class='catTitle'>
-							<div class='myGraph'></div>
-								<div class='myGraph'>
-									<canvas id='avgSpeedGraphRide' width='200' height='250'></canvas>
+							<div class='myGraph' style='-webkit-transform: translateY(15px)'>
+
+									<div class='colorKey lifeColor'></div>
+									<div class='keyName'>Life</div><br>
+
+									<div class='colorKey ytdColor'></div>
+									<div class='keyName'>YTD</div><br>
+
+									<div class='colorKey recentColor'></div>
+									<div class='keyName'>Recent</div>
+
 								</div>
-								<div class='myGraph'>
-									<canvas id='avgDistanceGraphRide' width='200' height='250'></canvas>
-								</div>
-								<div class='myGraph'>
-									<canvas id='timeGraphRide' width='250' height='250'></canvas>
-								</div>
+							<div class='myGraph'>
+								<canvas id='avgSpeedGraphRide' width='200' height='250'></canvas>
+							</div>
+							<div class='myGraph'>
+								<canvas id='avgDistanceGraphRide' width='200' height='250'></canvas>
+							</div>
+							<div class='myGraph'>
+								<canvas id='timeGraphRide' width='250' height='250'></canvas>
+							</div>
+						</div>
 						</div>
 					</div>
 				</div>
